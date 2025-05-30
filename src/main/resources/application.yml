@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: RagDemo
+  datasource:
+    url: jdbc:postgresql://10.15.25.11:5432/ragdemo
+    username: postgres
+    password: postgres
+  ai:
+    vectorstore:
+      pgvector:
+        dimensions: 1024 #embedding?????
+        distance-type: COSINE_DISTANCE #??????
+        max-document-batch-size: 10000 #????????
+        initialize-schema: true #????
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+          model: deepseek-r1:7b
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+
+# springdoc-openapi
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.swx.ragdemo.controller
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
